@@ -1,0 +1,28 @@
+.App {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#button_paper {
+  height: 30vh;
+  width: 50vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#ud_button {
+  justify-content: center;
+}
+
+#kyc_paper {
+  height: 50vh;
+  width: 100vh;
+  display: flex;
+}
+
+#kyc_heading {
+  
+}
