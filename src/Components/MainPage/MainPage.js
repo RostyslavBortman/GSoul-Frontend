@@ -3,11 +3,12 @@ import { useNavigate, useLocation } from "react-router-dom";
 import "./MainPage.css";
 import axios from "axios";
 import { ethers } from "ethers";
-import { sbt } from "../../helpers/configure-sbt";
+import { configureSBT } from "../../helpers/configure-sbt";
 import { create } from "ipfs-http-client";
 import { Buffer } from 'buffer';
 
 export default function MainPage() {
+  const sbt = configureSBT();
   const location = useLocation();
   // const address = location.state.address;
   const address = "0x352438D51fc9a0A145D089a94bD93865FD3947D8";
@@ -59,11 +60,13 @@ export default function MainPage() {
       }
     }
     const { cid } = await ipfs.add(JSON.stringify(metadata));
+    const cidV1 = cid.toV1().toString();
     const validNonce = await(await sbt.nonces(address)).toString();
-    const data = {to: address, nonce: validNonce, uri: cid.toV1 };
-    console.log(data);
-    // const signature = await axios.post(`http://localhost:7519/api/kyc/generateSignature`, );
-    // const result = await sbt.min
+    const data = {to: address, nonce: validNonce, uri: cidV1 };
+    const signature = await axios.post(`http://localhost:7519/api/kyc/generateSignature`, data);
+    const callParams = {...data, verifier: '0xa1e1fB25268cEfB55225dbE5fD63a3b44D35E6aA'}; 
+    const result = await sbt.mint(callParams, signature);
+    console.log(result)
   };
 
   if (!hasToken) {
