@@ -1,82 +1,71 @@
 import { React, useState } from "react";
 import "./RegisterPage.css";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
-
+import { useLocation, useNavigate } from "react-router-dom";
 
 export default function LoginPage() {
-    
-  let navigate = useNavigate();
-    
-    let getData = async () =>{
-       
-        let userAddress = document.getElementById("userAddress").value;
-        let username = document.getElementById("username").value;
-        let userlastname = document.getElementById("userlastname").value;
-        let userbirthday = document.getElementById("userbirthday").value;
-        let useremail = document.getElementById("useremail").value;
-        let usersex = document.getElementById("usersex").value;
+  const navigate = useNavigate();
+  const location = useLocation();
+  const address = location.state.address;
+  const [name, setName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [birthday, setBirthday] = useState("");
+  const [email, setEmail] = useState(""); 
+  const [sex, setSex] = useState("");
 
-        let bodyFormData = new FormData();
-        bodyFormData.set('address',userAddress);
-        bodyFormData.set('name', username);
-        bodyFormData.set('lastName',userlastname);
-        bodyFormData.set('birthday',userbirthday);
-        bodyFormData.set('email', useremail);
-        bodyFormData.set('sex', usersex);
-        bodyFormData.set('KYC',true);
-
-        axios({
-            method: 'post',
-            url: 'https://gsoul-app.herokuapp.com/api/kyc/addUser',
-            data: bodyFormData
-            })
-            .then(function (response) {
-                navigate("/verificationSuccessful")
-                //handle success
-                console.log(response);
-            })
-            .catch(function (response) {
-                //handle error
-                console.log(response);
-            });
-            navigate("/verificationSuccessful");
+  let signUp = async () => {
+    const data = {
+      address, name, lastName, birthday, email, sex 
     }
-    
+    // try {
+    //   const response = await axios.post("https://gsoul-app.herokuapp.com/api/kyc/addUser", data);
+    //   navigate("/verificationSuccessful");
+    // } catch (error) {
+    //   console.log(error);
+    // }
+  };
 
-  const [isIn, setIsIn] = useState(true);
-
-    const Isregistred = async () => {
-        axios.get('https://gsoul-app.herokuapp.com/api/kyc/getUserByAddress/0x3A0060f7e429e6a8c217B8229d232E8Da506aa5434dd')
-        .then(function (response) {
-          if(response.data.kyc == false){
-            setIsIn(false)
-          }   
-     }).catch(function (error) {
-
-      console.log(error);
-    })
-    };
-    Isregistred();
-      return (
-        <div className="registerPage">
-          <header className='registerPage-header'>
-            <div className='registerPage-wrapper'>
-                <form>
-                    <div className="inputWrapper">
-                        <input className="register-input" id="userAddress" type="text" placeholder="Address" required />
-                        <input className="register-input" id="username" type="text" placeholder="Name" />
-                        <input className="register-input" id="userlastname" type="text" placeholder="Lastname" />
-                        <input className="register-input" id="userbirthday" type="text" placeholder="Birthday" />
-                        <input className="register-input" id="useremail" type="email" placeholder="Email" />
-                        <input className="register-input" id="usersex" type="text" placeholder="Sex" />
-                    </div>
-                    <button className="register-button" type='button' onClick={getData}>get NFT</button> 
-
-                </form>
-            </div>
-          </header>
-      </div>
-      );
-    }    
-    
+  return (
+    <div className="loginPage">
+      <header className="loginPage-header">
+        <div className="loginPage-wrapper">
+          <form>
+            <input
+              className="register-input"
+              type="text"
+              placeholder="name"
+              onChange={(e) => setName(e.target.value)}
+            />
+            <input
+              className="register-input"
+              type="text"
+              placeholder="lastname"
+              onChange={(e) => setLastName(e.target.value)}
+            />
+            <input
+              className="register-input"
+              type="text"
+              placeholder="birthday"
+              onChange={(e) => setBirthday(e.target.value)}
+            />
+            <input
+              className="register-input"
+              type="email"
+              placeholder="email"
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <input
+              className="register-input"
+              type="text"
+              placeholder="sex"
+              onChange={(e) => setSex(e.target.value)}
+            />
+            <button type="button" onClick={signUp}>
+                Sign Up
+            </button>
+          </form>
+        </div>
+      </header>
+    </div>
+  );
+}
