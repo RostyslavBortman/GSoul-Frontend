@@ -3,10 +3,14 @@ import "./RegisterPage.css";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 
-export default function LoginPage() {
+export default function RegisterPage() {
   const navigate = useNavigate();
   const location = useLocation();
   const address = location.state.address;
+  const accessToken = location.state.accessToken;
+  console.log(accessToken)
+
+
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
   const [birthday, setBirthday] = useState("");
@@ -17,12 +21,17 @@ export default function LoginPage() {
     const data = {
       address, name, lastName, birthday, email, sex 
     }
-    // try {
-    //   const response = await axios.post("https://gsoul-app.herokuapp.com/api/kyc/addUser", data);
-    //   navigate("/mainPage");
-    // } catch (error) {
-    //   console.log(error);
-    // }
+    try {
+      await axios.post("https://gsoul-app.herokuapp.com/api/kyc/addUser", data,
+      {
+        headers: {
+          'Authorization': `Bearer ${accessToken}`
+        }
+      });
+      navigate("/mainPage");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

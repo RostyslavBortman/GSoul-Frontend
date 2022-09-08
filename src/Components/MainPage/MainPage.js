@@ -12,7 +12,7 @@ export default function LoginPage() {
     <div className="mainPage">
       <header className="mainPage-header">
         <div className="mainPage-wrapper">
-          <a className="mainPage-link" href="#" onClick={mint()}>
+          <a className="mainPage-link" href="#" onClick={mint}>
             mint Token
           </a>
         </div>

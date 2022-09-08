@@ -20,17 +20,12 @@ export default function LoginPage() {
   const KYCVerification = async () => {
     try {
       const response = await axios.get(
-        `https://gsoul-app.herokuapp.com/api/kyc/getUserByAddress/${address}`,
-        {
-          headers: {
-            authorization: `Bearer ${accessToken}`
-          }
-        }
+        `https://gsoul-app.herokuapp.com/api/kyc/getUserByAddress/${address}`
       );
-      console.log(response);
-      navigate("/mintPage");
+      navigate("/mainPage");
     } catch (error) {
-      navigate("/registerPage", {state: {address: address}});
+      console.log("Access Token", accessToken);
+      navigate("/registerPage", {state: {address: address, accessToken: accessToken}});
     }
   };
 
