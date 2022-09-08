@@ -8,12 +8,14 @@ export default function LoginPage() {
   let navigate = useNavigate();
   const [accessToken, setAccessToken] = useState("");
   const [address, setAddress] = useState("");
+  const [domain, setDomain] = useState("");
   const [isIn, setIsIn] = useState(false);
 
   const connectToUD = async () => {
     const authorization = await uauth.loginWithPopup();
     setAccessToken(authorization.accessToken);
     setAddress(authorization.idToken.wallet_address);
+    setDomain(authorization.idToken.sub);
     setIsIn(true);
   };
 
@@ -22,10 +24,10 @@ export default function LoginPage() {
       const response = await axios.get(
         `https://gsoul-app.herokuapp.com/api/kyc/getUserByAddress/${address}`
       );
-      navigate("/mainPage");
+      navigate("/mainPage", {state: {address: address, domain: domain}});
     } catch (error) {
       console.log("Access Token", accessToken);
-      navigate("/registerPage", {state: {address: address, accessToken: accessToken}});
+      navigate("/registerPage", {state: {address: address, accessToken: accessToken, domain: domain}});
     }
   };
 

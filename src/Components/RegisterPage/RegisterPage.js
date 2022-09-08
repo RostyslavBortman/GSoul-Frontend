@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useEffect, useState } from "react";
 import "./RegisterPage.css";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -8,25 +8,38 @@ export default function RegisterPage() {
   const location = useLocation();
   const address = location.state.address;
   const accessToken = location.state.accessToken;
+  const domain = location.state.domain;
 
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
   const [birthday, setBirthday] = useState("");
-  const [email, setEmail] = useState(""); 
+  const [email, setEmail] = useState("");
   const [sex, setSex] = useState("");
+
+  useEffect(() => {
+    window.alert("KYC is not granted. Please, sign up");
+  });
 
   let signUp = async () => {
     const data = {
-      address, name, lastName, birthday, email, sex 
-    }
+      address,
+      name,
+      lastName,
+      birthday,
+      email,
+      sex,
+    };
     try {
-      await axios.post("https://gsoul-app.herokuapp.com/api/kyc/addUser", data,
-      {
-        headers: {
-          'Authorization': `Bearer ${accessToken}`
+      await axios.post(
+        "https://gsoul-app.herokuapp.com/api/kyc/addUser",
+        data,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
         }
-      });
-      navigate("/mainPage");
+      );
+      navigate("/mainPage", {address: address, domain: domain});
     } catch (error) {
       console.log(error);
     }
@@ -34,9 +47,6 @@ export default function RegisterPage() {
 
   return (
     <div className="loginPage">
-      <h2 className='registerPage-title'>
-          KYC is not granted. Please, sign up
-      </h2> 
       <header className="loginPage-header">
         <div className="loginPage-wrapper">
           <form>
@@ -71,7 +81,7 @@ export default function RegisterPage() {
               onChange={(e) => setSex(e.target.value)}
             />
             <button type="button" onClick={signUp}>
-                Sign Up
+              Sign Up
             </button>
           </form>
         </div>
