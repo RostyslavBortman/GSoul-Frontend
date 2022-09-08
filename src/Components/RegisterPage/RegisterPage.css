@@ -6,9 +6,11 @@
     color: rgba(252, 245, 229);
     font-weight: normal;
   }
+
   .registerPage-title{
     font-size: 40px;
-    margin: 40px 0 15px 0; 
+    margin: 0 0 15px 0; 
+    padding-bottom:100px;  
   }
   
   .registerPage-header {

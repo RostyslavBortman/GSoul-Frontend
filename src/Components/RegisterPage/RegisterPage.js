@@ -8,8 +8,6 @@ export default function RegisterPage() {
   const location = useLocation();
   const address = location.state.address;
   const accessToken = location.state.accessToken;
-  console.log(accessToken)
-
 
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -36,7 +34,9 @@ export default function RegisterPage() {
 
   return (
     <div className="loginPage">
-      <h2 className="title">KYC is not granted. Please, sign up</h2>
+      <h2 className='registerPage-title'>
+          KYC is not granted. Please, sign up
+      </h2> 
       <header className="loginPage-header">
         <div className="loginPage-wrapper">
           <form>
