@@ -59,17 +59,19 @@ export default function LoginPage() {
     };
     Isregistred();
       return (
-        <div className="loginPage">
-          <header className='loginPage-header'>
-            <div className='loginPage-wrapper'>
+        <div className="registerPage">
+          <header className='registerPage-header'>
+            <div className='registerPage-wrapper'>
                 <form>
-                    <input className="register-input" id="userAddress" type="text" placeholder="address" required />
-                    <input className="register-input" id="username" type="text" placeholder="name" />
-                    <input className="register-input" id="userlastname" type="text" placeholder="lastname" />
-                    <input className="register-input" id="userbirthday" type="text" placeholder="birthday" />
-                    <input className="register-input" id="useremail" type="email" placeholder="email" />
-                    <input className="register-input" id="usersex" type="text" placeholder="sex" />
-                    <button type='button' onClick={getData}>get NFT</button> 
+                    <div className="inputWrapper">
+                        <input className="register-input" id="userAddress" type="text" placeholder="Address" required />
+                        <input className="register-input" id="username" type="text" placeholder="Name" />
+                        <input className="register-input" id="userlastname" type="text" placeholder="Lastname" />
+                        <input className="register-input" id="userbirthday" type="text" placeholder="Birthday" />
+                        <input className="register-input" id="useremail" type="email" placeholder="Email" />
+                        <input className="register-input" id="usersex" type="text" placeholder="Sex" />
+                    </div>
+                    <button className="register-button" type='button' onClick={getData}>get NFT</button> 
 
                 </form>
             </div>

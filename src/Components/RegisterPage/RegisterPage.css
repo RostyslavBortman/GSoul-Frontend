@@ -1,0 +1,86 @@
+
+.registerPage {
+    font-family: 'Krona One', sans-serif;
+    text-align: center;
+    font-size: 16px;
+    color: rgba(252, 245, 229);
+    font-weight: normal;
+  }
+  .registerPage-title{
+    font-size: 40px;
+    margin: 40px 0 15px 0; 
+  }
+  
+  .registerPage-header {
+    background-color: #021512;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+  }
+  
+  .registerPage-link {
+    width: 350px;
+    height: 60px;
+    background-color: rgb(97, 41, 9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Comfortaa', cursive;
+    border-radius: 25px;
+    color: rgba(252, 245, 229);   
+      text-decoration: none;
+      font-size: calc(9px + 2vmin);
+  }
+  .registerPage-link:hover {
+    color: rgba(252, 245, 229);
+    background-color: rgb(228, 92, 13);}
+  .registerPage-wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #0a343181;
+      box-sizing: border-box;
+    border-radius: 100px;
+    width: 700px;
+    height: 400px;
+    margin: 0 auto;
+    -webkit-box-shadow: 0px 0px 63px -10px rgb(228, 92, 13);
+      -moz-box-shadow: 0px 0px 63px -10px rgb(228, 92, 13);
+      box-shadow: 0px 0px 63px -10px rgb(228, 92, 13);
+      
+        
+  }
+  .registerPage-text{
+    font-family: 'Dosis', sans-serif;
+    margin-top: 120px;
+    color: rgb(170, 166, 157);
+  }
+  
+.register-input{
+    box-sizing: border-box;
+    width: 200px;
+    height: 40px;
+    padding-left: 15px;
+    border-radius: 5px;
+    border: none;
+    margin: 25px;
+    outline: none;
+}
+.inputWrapper{
+    width: 500px;
+}
+.register-button{
+    width: 200px;
+    height: 40px;
+    border-radius: 15px;
+    background-color: rgb(139, 91, 32);
+    border: none;
+}
+.register-button:hover{
+    background-color: rgb(202, 122, 23);
+}

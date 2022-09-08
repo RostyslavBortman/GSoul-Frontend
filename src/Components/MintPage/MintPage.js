@@ -3,19 +3,18 @@ import "./MintPage.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const ethers = require('ethers');
-const axios = require("axios");
-const Web3 = require("web3");
+// const ethers = require('ethers');
+// const Web3 = require("web3");
 
 export default function LoginPage() {
-  const provider = new ethers.providers.AlchemyProvider('goerli', process.env.API_KEY)
-  const privateKey = process.env.PRIVATE_KEY
-  const signer = new ethers.Wallet(privateKey, provider)
-  const contractAddress = '';  // TO DO!!!
+  // const provider = new ethers.providers.AlchemyProvider('goerli', process.env.API_KEY)
+  // const privateKey = process.env.PRIVATE_KEY
+  // const signer = new ethers.Wallet(privateKey, provider)
+  // const contractAddress = '';  // TO DO!!!
 
   // let contract_ABI = ; // TO DO !!!
 
-  const contract = new ethers.Contract(contractAddress, contract_ABI, signer);
+  // const contract = new ethers.Contract(contractAddress, contract_ABI, signer);
 
 
   const [isIn, setIsIn] = useState(true);
@@ -42,7 +41,7 @@ export default function LoginPage() {
         <div className="mintPage">
           <header className='mintPage-header'>
             <div className='mintPage-wrapper'>
-                <a className='mintPage-link' href='#' onClick={mint()}>
+                <a className='mintPage-link' href='#' onClick={mint}>
                   mint Token
                 </a>
             </div>
