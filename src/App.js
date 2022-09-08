@@ -6,7 +6,7 @@ import {
   Route,
 } from "react-router-dom";
 import LoginPage from "./Components/LoginWithUD/LoginPage";
-import MintPage from "./Components/MintPage/MintPage";
+import MainPage from "./Components/MainPage/MainPage";
 import RegisterPage from "./Components/RegisterPage/RegisterPage";
 
 
@@ -15,8 +15,8 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<LoginPage />} />
-          <Route path="verificationSuccessful" element={<MintPage />} />
-          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/mainPage" element={<MainPage />} />
+          <Route path="/registerPage" element={<RegisterPage />} />
         </Routes>
       </BrowserRouter>
     );

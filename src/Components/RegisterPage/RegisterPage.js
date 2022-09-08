@@ -19,7 +19,7 @@ export default function LoginPage() {
     }
     // try {
     //   const response = await axios.post("https://gsoul-app.herokuapp.com/api/kyc/addUser", data);
-    //   navigate("/verificationSuccessful");
+    //   navigate("/mainPage");
     // } catch (error) {
     //   console.log(error);
     // }
@@ -27,6 +27,7 @@ export default function LoginPage() {
 
   return (
     <div className="loginPage">
+      <h2 className="title">KYC is not granted. Please, sign up</h2>
       <header className="loginPage-header">
         <div className="loginPage-wrapper">
           <form>

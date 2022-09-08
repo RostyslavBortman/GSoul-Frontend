@@ -1,17 +1,17 @@
 
-.mintPage {
+.mainPage {
     font-family: 'Krona One', sans-serif;
     text-align: center;
     font-size: 16px;
     color: rgba(252, 245, 229);
     font-weight: normal;
   }
-  .mintPage-title{
+  .mainPage-title{
     font-size: 40px;
     margin: 40px 0 15px 0; 
   }
   
-  .mintPage-header {
+  .mainPage-header {
     background-color: #021512;
     width: 100%;
     min-height: 100vh;
@@ -22,7 +22,7 @@
     font-size: calc(10px + 2vmin);
   }
   
-  .mintPage-link {
+  .mainPage-link {
     width: 350px;
     height: 60px;
     background-color: rgb(97, 41, 9);
@@ -35,10 +35,10 @@
       text-decoration: none;
       font-size: calc(9px + 2vmin);
   }
-  .mintPage-link:hover {
+  .mainPage-link:hover {
     color: rgba(252, 245, 229);
     background-color: rgb(228, 92, 13);}
-.mintPage-link-err {
+.mainPage-link-err {
         width: 350px;
         height: 60px;
         display: flex;
@@ -50,10 +50,10 @@
           text-decoration: none;
           font-size: calc(9px + 2vmin);
 }
-.mintPage-link-err:hover {
+.mainPage-link-err:hover {
         color: rgba(252, 245, 229);
     }
-  .mintPage-wrapper{
+  .mainPage-wrapper{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -70,7 +70,7 @@
       
         
   }
-  .mintPage-text{
+  .mainPage-text{
     font-family: 'Dosis', sans-serif;
     margin-top: 120px;
     color: rgb(170, 166, 157);

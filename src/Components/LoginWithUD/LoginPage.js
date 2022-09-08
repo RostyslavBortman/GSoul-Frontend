@@ -6,12 +6,13 @@ import axios from "axios";
 
 export default function LoginPage() {
   let navigate = useNavigate();
-
+  const [accessToken, setAccessToken] = useState("");
   const [address, setAddress] = useState("");
   const [isIn, setIsIn] = useState(false);
 
   const connectToUD = async () => {
     const authorization = await uauth.loginWithPopup();
+    setAccessToken(authorization.accessToken);
     setAddress(authorization.idToken.wallet_address);
     setIsIn(true);
   };
@@ -19,12 +20,17 @@ export default function LoginPage() {
   const KYCVerification = async () => {
     try {
       const response = await axios.get(
-        `https://gsoul-app.herokuapp.com/api/kyc/getUserByAddress/${address}`
+        `https://gsoul-app.herokuapp.com/api/kyc/getUserByAddress/${address}`,
+        {
+          headers: {
+            authorization: `Bearer ${accessToken}`
+          }
+        }
       );
       console.log(response);
-      navigate("/verificationSuccessful");
+      navigate("/mintPage");
     } catch (error) {
-      navigate("/register", {state: {address: address}});
+      navigate("/registerPage", {state: {address: address}});
     }
   };
 
@@ -47,6 +53,7 @@ export default function LoginPage() {
       <div className="loginPage">
         <header className="loginPage-header">
           <div className="loginPage-wrapper">
+          <h1 className="title">Check your KYC status</h1>
             <a className="loginPage-link" href="#" onClick={KYCVerification}>
               KYC
             </a>
