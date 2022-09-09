@@ -15,8 +15,8 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<LoginPage />} />
-          <Route path="/mainPage" element={<MainPage />} />
-          <Route path="/registerPage" element={<RegisterPage />} />
+          <Route path="/registerPage/:address/:domain/:accessToken" element={<RegisterPage />} />
+          <Route path="/mainPage/:address/:domain/" element={<MainPage />} />
         </Routes>
       </BrowserRouter>
     );

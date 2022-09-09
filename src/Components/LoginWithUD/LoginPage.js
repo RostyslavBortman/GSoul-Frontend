@@ -8,13 +8,10 @@ export default function LoginPage() {
 
   const connectToUD = async () => {
     const authorization = await uauth.loginWithPopup();
-    navigate("/registerPage", {
-      state: {
-        address: authorization.idToken.wallet_address,
-        accessToken: authorization.accessToken,
-        domain: authorization.idToken.sub,
-      },
-    });
+    const address = authorization.idToken.wallet_address;
+    const accessToken = authorization.accessToken;
+    const domain = authorization.idToken.sub;
+    navigate(`/registerPage/${address}/${domain}/${accessToken}`);
   };
 
   return (

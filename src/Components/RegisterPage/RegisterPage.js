@@ -1,14 +1,15 @@
 import { React, useEffect, useState } from "react";
 import "./RegisterPage.css";
 import axios from "axios";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 export default function RegisterPage() {
   const navigate = useNavigate();
-  const location = useLocation();
-  const [address, setAddress] = useState(location.state.address);
-  const [domain, setDomain] = useState(location.state.domain);
-  const [accessToken, setAccessToken] = useState(location.state.accessToken);
+
+  const params = useParams();
+  const [address, setAddress] = useState(params.address);
+  const [domain, setDomain] = useState(params.domain);
+  const [accessToken, setAccessToken] = useState(params.accessToken);
 
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -22,7 +23,7 @@ export default function RegisterPage() {
         const response = await axios.get(
           `https://gsoul-app.herokuapp.com/api/kyc/getUserByAddress/${address}`
         );
-        navigate("/mainPage", { state: { address: address, domain: domain } });
+        navigate(`/mainPage/${address}/${domain}`);
       } catch (error) {
       }
     };
@@ -49,7 +50,7 @@ export default function RegisterPage() {
           },
         }
       );
-      navigate("/mainPage", { state: { address: address, domain: domain } });
+      navigate(`/mainPage/${address}/${domain}`);
     } catch (error) {
       console.log(error);
     }

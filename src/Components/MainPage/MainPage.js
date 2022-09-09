@@ -1,5 +1,5 @@
 import { React, useEffect, useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import "./MainPage.css";
 import axios from "axios";
 import { sbt } from "../../helpers/configure-sbt";
@@ -9,9 +9,9 @@ import { Buffer } from "buffer";
 import { provider, sbt_address } from "../../helpers/constants";
 
 export default function MainPage() {
-  const location = useLocation();
-  const [address, setAddress] = useState(location.state.address);
-  const [domain, setDomain] = useState(location.state.domain);
+  const params = useParams();
+  const [address, setAddress] = useState(params.address);
+  const [domain, setDomain] = useState(params.domain);
 
   const [hasToken, setHasToken] = useState();
   const [karma, setKarma] = useState("");
@@ -77,7 +77,7 @@ export default function MainPage() {
     const data = {
       to: address,
       nonce: validNonce,
-      uri: cidV1,
+      uri: `ipfs.io/ipfs/${cidV1}`,
       verifyingContract: sbt_address,
     };
     const signature = await (
