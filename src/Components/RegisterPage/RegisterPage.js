@@ -50,7 +50,7 @@ export default function RegisterPage() {
           },
         }
       );
-      navigate("/mainPage", { address: address, domain: domain });
+      navigate("/mainPage", { state: { address: address, domain: domain } });
     } catch (error) {
       console.log(error);
     }
