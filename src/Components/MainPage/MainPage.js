@@ -22,12 +22,18 @@ export default function MainPage() {
     async function getUserToken() {
       const result = await sbt.tokenOf(address);
       console.log(result.toString())
-      return result.toString() === "0";
+      if (result.toString() === "0") {
+        setHasToken(false);
+      } else {
+        setHasToken(true);
+      }
     }
 
     async function getUserKarma() {
+      const owner = await storage.owner();
+      console.log(owner)
       const result = await storage.getUserKarma(address);
-      console.log(result.toString());
+
       setKarma(result.toString());
     }
     setHasToken(getUserToken());

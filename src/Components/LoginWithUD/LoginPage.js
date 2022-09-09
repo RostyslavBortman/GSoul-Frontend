@@ -11,8 +11,8 @@ export default function LoginPage() {
     navigate("/registerPage", {
       state: {
         address: authorization.idToken.wallet_address,
-        accessToken: authorization.idToken.sub,
-        domain: authorization.accessToken,
+        accessToken: authorization.accessToken,
+        domain: authorization.idToken.sub,
       },
     });
   };
