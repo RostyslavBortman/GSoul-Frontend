@@ -96,9 +96,9 @@ export default function MainPage() {
     await sbt.connect(signer).mint(callParams, signature);
     const delay = (ms) => new Promise((res) => setTimeout(res, ms));
     window.alert("Waiting.....");
-    await delay(10000);
+    await delay(15000);
     window.alert("Just want you to know it's ok");
-    await delay(11000);
+    await delay(15000);
     window.alert("Creating User");
     await storage.connect(signer).createUser(sbt_address);
     setHasToken(!hasToken);
