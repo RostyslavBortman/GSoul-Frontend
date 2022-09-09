@@ -2,12 +2,11 @@ import { React, useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./MainPage.css";
 import axios from "axios";
-import { ethers } from "ethers";
 import { sbt } from "../../helpers/configure-sbt";
 import { storage } from "../../helpers/configure-storage";
 import { create } from "ipfs-http-client";
 import { Buffer } from 'buffer';
-import { provider } from "../../helpers/constants";
+import { provider, sbt_address } from "../../helpers/constants";
 
 export default function MainPage() {
   const location = useLocation();
@@ -78,7 +77,7 @@ export default function MainPage() {
     const { cid } = await ipfs.add(JSON.stringify(metadata));
     const cidV1 = cid.toV1().toString();
     const validNonce = await(await sbt.nonces(address)).toString();
-    const data = {to: address, nonce: validNonce, uri: cidV1 };
+    const data = {to: address, nonce: validNonce, uri: cidV1, verifyingContract: sbt_address };
     const signature = await(await axios.post(`https://gsoul-app.herokuapp.com/api/kyc/generateSignature`, data)).data.signature;
     const callParams = {...data, verifier: '0xa1e1fB25268cEfB55225dbE5fD63a3b44D35E6aA'}; 
     await provider.send("eth_requestAccounts", []);
@@ -86,7 +85,7 @@ export default function MainPage() {
     const signer = provider.getSigner()
     await sbt.connect(signer).mint(callParams, signature);
     window.alert('Creating User');
-    await storage.connect(signer).createUser('0x55A84B89CB4da7Ab78BCe0EB256D51E64d5d7f25');
+    await storage.connect(signer).createUser(sbt_address);
     setHasToken(!hasToken);
   };
 
