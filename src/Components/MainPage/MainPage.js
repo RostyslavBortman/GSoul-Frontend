@@ -15,17 +15,18 @@ export default function MainPage() {
   // const domain = location.state.domain;
   const domain = '0xd3mage.crypto';
 
-  const [hasToken, setHasToken] = useState(async () => {});
+  const [hasToken, setHasToken] = useState();
 
   useEffect(() => {
 
     async function getUserToken() {
       const result = await sbt.tokenOf(address);
+      console.log(result.toString())
       return result.toString() === "0";
     }
-    setHasToken(!getUserToken());
+    setHasToken(getUserToken());
   }, []);
-
+  console.log(hasToken)
 
   const mintToken = async () => {
     const projectId = '2EVKZMy7X0ALOcYTmiBKKF5Pz8k'; 
