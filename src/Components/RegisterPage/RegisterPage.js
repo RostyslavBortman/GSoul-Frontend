@@ -9,6 +9,7 @@ export default function RegisterPage() {
   const address = location.state.address;
   const accessToken = location.state.accessToken;
   const domain = location.state.domain;
+  console.log(address, accessToken, domain);
 
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -17,10 +18,20 @@ export default function RegisterPage() {
   const [sex, setSex] = useState("");
 
   useEffect(() => {
-   // window.alert("KYC is not granted. Please, sign up");
-  });
+    const KYCVerification = async () => {
+      try {
+        const response = await axios.get(
+          `https://gsoul-app.herokuapp.com/api/kyc/getUserByAddress/${address}`
+        );
+        navigate("/mainPage", { state: { address: address, domain: domain } });
+      } catch (error) {
+      }
+    };
 
-  let signUp = async () => {
+    KYCVerification();
+  }, []);
+
+  const signUp = async () => {
     const data = {
       address,
       name,
@@ -39,7 +50,7 @@ export default function RegisterPage() {
           },
         }
       );
-      navigate("/mainPage", {address: address, domain: domain});
+      navigate("/mainPage", { address: address, domain: domain });
     } catch (error) {
       console.log(error);
     }

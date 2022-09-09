@@ -4,6 +4,7 @@ import "./MainPage.css";
 import axios from "axios";
 import { ethers } from "ethers";
 import { sbt } from "../../helpers/configure-sbt";
+import { storage } from "../../helpers/configure-storage";
 import { create } from "ipfs-http-client";
 import { Buffer } from 'buffer';
 import { provider } from "../../helpers/constants";
@@ -15,17 +16,25 @@ export default function MainPage() {
   // const domain = location.state.domain;
   const domain = '0xd3mage.crypto';
 
-  const [hasToken, setHasToken] = useState(async () => {});
+  const [hasToken, setHasToken] = useState();
+  const [karma, setKarma] = useState('');
 
   useEffect(() => {
 
     async function getUserToken() {
       const result = await sbt.tokenOf(address);
+      console.log(result.toString())
       return result.toString() === "0";
     }
-    setHasToken(!getUserToken());
-  }, []);
 
+    async function getUserKarma() {
+      const result = await storage.getUserKarma(address);
+      console.log(result.toString());
+    }
+    setHasToken(getUserToken());
+    getUserKarma();
+  }, []);
+  console.log(hasToken)
 
   const mintToken = async () => {
     const projectId = '2EVKZMy7X0ALOcYTmiBKKF5Pz8k'; 
@@ -88,10 +97,8 @@ export default function MainPage() {
       <div className="loginPage">
         <header className="loginPage-header">
           <div className="loginPage-wrapper">
-            {/* Domain name here */}
-            <p>Welcome, domain.name</p>
-            {/* karma */}
-            <p>Your karma: </p>
+            <p>Welcome, {domain}</p>
+            <p>Your karma: {karma}</p>
             <form>
               <input
                 className="register-input"
