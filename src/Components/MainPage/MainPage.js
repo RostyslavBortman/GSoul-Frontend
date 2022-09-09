@@ -17,6 +17,8 @@ export default function MainPage() {
   const [hasToken, setHasToken] = useState();
   const [karma, setKarma] = useState('');
 
+  const [receiver, setReceiver] = useState('');
+
   useEffect(() => {
 
     async function getUserToken() {
@@ -83,12 +85,20 @@ export default function MainPage() {
     window.alert('Creating Token');
     const signer = provider.getSigner()
     await sbt.connect(signer).mint(callParams, signature);
-    window.alert('Confirming SBT');
-    await storage.connect(signer).confirmSBT('0x6AF941bCa64baC55a76dD02341a29d5D85958A22');
     window.alert('Creating User');
-    await storage.connect(signer).createUser();
+    await storage.connect(signer).createUser('0x55A84B89CB4da7Ab78BCe0EB256D51E64d5d7f25');
     setHasToken(!hasToken);
   };
+
+  const sendKarmaUpvote = async () => {
+    const signer = provider.getSigner()
+    await storage.connect(signer).sendKarma(receiver, '3', 0);
+  }
+
+  const sendKarmaDownvote = async () => {
+    const signer = provider.getSigner()
+    await storage.connect(signer).sendKarma(receiver, '3', 1);
+  }
 
   if (!hasToken) {
     return (
@@ -114,28 +124,30 @@ export default function MainPage() {
               <input
                 className="register-input"
                 type="text"
-                placeholder="address to up Vote"
+                placeholder="upvote address"
+                onChange={(e) => {setReceiver(e.target.value)}}
               />
               <button
                 type="button"
                 className="register-button"
-                // onClick={voteUp} connect to contract function TO DO!!!
+                onClick={sendKarmaUpvote}
               >
-                Up Vote
+                Upvote
               </button>
             </form>
             <form>
               <input
                 className="register-input"
                 type="text"
-                placeholder="address to down Vote"
+                placeholder="downvote address"
+                onChange={(e) => {setReceiver(e.target.value)}}
               />
               <button
                 type="button"
                 className="register-button"
-                // onClick={voteDown}  connect to contract function TO DO!!!
+                onClick={sendKarmaDownvote}
               >
-                Down Vote
+                Downvote
               </button>
             </form>
           </div>
