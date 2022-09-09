@@ -11,10 +11,8 @@ import { provider } from "../../helpers/constants";
 
 export default function MainPage() {
   const location = useLocation();
-  // const address = location.state.address;
-  const address = "0x352438D51fc9a0A145D089a94bD93865FD3947D8";
-  // const domain = location.state.domain;
-  const domain = '0xd3mage.crypto';
+  const address = location.state.address;
+  const domain = location.state.domain;
 
   const [hasToken, setHasToken] = useState();
   const [karma, setKarma] = useState('');
@@ -30,13 +28,14 @@ export default function MainPage() {
     async function getUserKarma() {
       const result = await storage.getUserKarma(address);
       console.log(result.toString());
+      setKarma(result.toString());
     }
     setHasToken(getUserToken());
     getUserKarma();
   }, []);
   console.log(hasToken)
 
-  const mintToken = async () => {
+  const register = async () => {
     const projectId = '2EVKZMy7X0ALOcYTmiBKKF5Pz8k'; 
     const projectSecret = '7af10aea3ce8fbd183f4240925c240e6';
     const auth = 'Basic ' + Buffer.from(projectId + ':' + projectSecret).toString('base64');
@@ -75,8 +74,14 @@ export default function MainPage() {
     const signature = await(await axios.post(`https://gsoul-app.herokuapp.com/api/kyc/generateSignature`, data)).data.signature;
     const callParams = {...data, verifier: '0xa1e1fB25268cEfB55225dbE5fD63a3b44D35E6aA'}; 
     await provider.send("eth_requestAccounts", []);
+    window.alert('Creating Token');
     const signer = provider.getSigner()
     await sbt.connect(signer).mint(callParams, signature);
+    window.alert('Confirming SBT');
+    await storage.connect(signer).confirmSBT('0x6AF941bCa64baC55a76dD02341a29d5D85958A22');
+    window.alert('Creating User');
+    await storage.connect(signer).createUser();
+    setHasToken(!hasToken);
   };
 
   if (!hasToken) {
@@ -85,7 +90,7 @@ export default function MainPage() {
         <header className="loginPage-header">
           <div className="loginPage-wrapper">
             <p>Welcome, {domain}</p>
-            <a className="loginPage-link" href="#" onClick={mintToken}>
+            <a className="loginPage-link" href="#" onClick={register}>
               Mint your token
             </a>
           </div>
