@@ -25,7 +25,6 @@ export default function RegisterPage() {
         );
         navigate("/mainPage", { state: { address: address, domain: domain } });
       } catch (error) {
-        window.alert("KYC is not granted. Please, sign up");
       }
     };
 
