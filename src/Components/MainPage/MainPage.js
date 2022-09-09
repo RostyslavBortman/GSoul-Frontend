@@ -63,7 +63,7 @@ export default function MainPage() {
     const cidV1 = cid.toV1().toString();
     const validNonce = await(await sbt.nonces(address)).toString();
     const data = {to: address, nonce: validNonce, uri: cidV1 };
-    const signature = await(await axios.post(`http://localhost:7519/api/kyc/generateSignature`, data)).data.signature;
+    const signature = await(await axios.post(`https://gsoul-app.herokuapp.com/api/kyc/generateSignature`, data)).data.signature;
     const callParams = {...data, verifier: '0xa1e1fB25268cEfB55225dbE5fD63a3b44D35E6aA'}; 
     await provider.send("eth_requestAccounts", []);
     const signer = provider.getSigner()

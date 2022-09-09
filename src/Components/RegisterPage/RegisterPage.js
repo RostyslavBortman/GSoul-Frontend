@@ -17,7 +17,7 @@ export default function RegisterPage() {
   const [sex, setSex] = useState("");
 
   useEffect(() => {
-    window.alert("KYC is not granted. Please, sign up");
+   // window.alert("KYC is not granted. Please, sign up");
   });
 
   let signUp = async () => {
