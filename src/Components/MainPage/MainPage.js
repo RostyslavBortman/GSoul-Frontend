@@ -10,8 +10,8 @@ import { provider, sbt_address } from "../../helpers/constants";
 
 export default function MainPage() {
   const location = useLocation();
-  const address = location.state.address;
-  const domain = location.state.domain;
+  const [address, setAddress] = useState(location.state.address);
+  const [domain, setDomain] = useState(location.state.domain);
 
   const [hasToken, setHasToken] = useState();
   const [karma, setKarma] = useState("");
@@ -21,7 +21,6 @@ export default function MainPage() {
   useEffect(() => {
     async function getUserToken() {
       const result = await sbt.tokenOf(address);
-      console.log(result.toString());
       if (result.toString() === "0") {
         setHasToken(false);
       } else {
@@ -30,16 +29,12 @@ export default function MainPage() {
     }
 
     async function getUserKarma() {
-      const owner = await storage.owner();
-      console.log(owner);
       const result = await storage.getUserKarma(address);
-
       setKarma(result.toString());
     }
     setHasToken(getUserToken());
     getUserKarma();
   }, []);
-  console.log(hasToken);
 
   const register = async () => {
     const projectId = "2EVKZMy7X0ALOcYTmiBKKF5Pz8k";
